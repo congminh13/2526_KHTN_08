@@ -24,13 +24,14 @@ def logistic_regression_predict(ptpn11, mical2):
 
 
 def show():
-    st.title("Mô hình dự đoán nguy cơ di căn xương")
-    st.markdown("Nhập giá trị biểu hiện gene để dự đoán nguy cơ di căn xương ở bệnh nhân ung thư vú")
+    st.markdown("# Mô hình dự đoán nguy cơ di căn xương")
+    st.markdown('<p style="font-size:20px;">Nhập giá trị biểu hiện gene để dự đoán nguy cơ di căn xương ở bệnh nhân ung thư vú</p>', unsafe_allow_html=True)
+    # st.markdown('<p style="font-size:20px;">---</p>', unsafe_allow_html=True)
     st.markdown("---")
     
     ###
-    st.title("Công cụ dự đoán nguy cơ di căn xương")
-    st.write("Nhập giá trị biểu hiện gene để dự đoán nguy cơ di căn xương ở bệnh nhân ung thư vú")
+    st.markdown("## Công cụ dự đoán nguy cơ di căn xương")
+    st.write('<p style="font-size:20px;">Nhập giá trị biểu hiện gene để dự đoán nguy cơ di căn xương ở bệnh nhân ung thư vú</p>', unsafe_allow_html=True)
 
     # Input gene expressions via text input
     ptpn11_input = st.number_input("Biểu hiện gene PTPN11 đã chuẩn hóa Z-score", min_value=-100.0, max_value=100.0, value=0.123456789, step=0.1, format="%.9f")
@@ -64,27 +65,34 @@ def show():
     các yếu tố lâm sàng, hình ảnh học và xét nghiệm khác.
     """)
     
+    # st.markdown('<p style="font-size:20px;">---</p>', unsafe_allow_html=True)
     st.markdown("---")
-    st.markdown("### Câu hỏi thường gặp")
+    st.markdown("## Câu hỏi thường gặp")
     
     with st.expander("Làm thế nào để đo biểu hiện gen?"):
         st.markdown("""
+        <p style="font-size:18px;">
         Biểu hiện gene được đo bằng các kỹ thuật như RT-PCR, microarray, hoặc RNA sequencing 
         từ mẫu máu hoặc mô u. Giá trị thường được chuẩn hóa theo thang điểm để so sánh.
-        """)
+        </p>
+        """, unsafe_allow_html=True)
     
     with st.expander("Ngưỡng tối ưu được xác định như thế nào?"):
         st.markdown("""
+        <p style="font-size:18px;">
         Ngưỡng được tối ưu hóa dựa trên phân tích đường cong ROC, cân bằng giữa độ nhạy 
         và độ đặc hiệu để đạt hiệu suất tổng thể tốt nhất trên tập huấn luyện.
-        """)
+        </p>
+        """, unsafe_allow_html=True)
     
     with st.expander("Nguy cơ cao có nghĩa là chắc chắn sẽ di căn?"):
         st.markdown("""
+        <p style="font-size:18px;">
         Không. "Nguy cơ cao" chỉ nghĩa là xác suất di căn cao hơn trung bình, không phải 
         chắc chắn. Nhiều yếu tố khác như điều trị, thể trạng bệnh nhân cũng ảnh hưởng 
         đến kết quả thực tế.
-        """)
+        </p>
+        """, unsafe_allow_html=True)
 
 show()
 menu()

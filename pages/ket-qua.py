@@ -39,10 +39,10 @@ def show():
             f"""
             <div style="text-align: center;">
                 <div style="display: inline-flex; justify-content: center; gap: 20px;">
-                    <img src="data:image/png;base64,{img1_base64}" width="450">
-                    <img src="data:image/png;base64,{img2_base64}" width="450">
+                    <img src="data:image/png;base64,{img1_base64}" width="650">
+                    <img src="data:image/png;base64,{img2_base64}" width="650">
                 </div>
-                <p style="font-size:14px; color:gray; margin-top: 10px;">
+                <p style="font-size:18px; color:gray; margin-top: 0px;">
                     Giản đồ Venn thể hiện các probeset biểu hiện khác biệt chung giữa 
                     hai phương pháp DEGs và AUC
                 </p>
@@ -54,14 +54,14 @@ def show():
         st.info("Một hoặc cả hai hình ảnh chưa được thêm.")
     
     genes = ["NFYC", "CEP57", "CD44", "ABCC5", "TGFB1I1", "PTPN11", "SMARCA2", "MICAL2", "SLC36A1", "ZXDA"]
-    
+
     cols = st.columns(5)
     for i, gene in enumerate(genes):
         with cols[i % 5]:
             if gene in ["PTPN11", "MICAL2"]:
                 st.info(f"**{i+1}. {gene}**")
             else:
-                st.write(f"**{i+1}. {gene}**")
+                st.markdown(f"**{i+1}. {gene}**", unsafe_allow_html=True)
     
     st.warning("**Đặc biệt chú ý:** Hai gen **PTPN11** và **MICAL2** được xác định là các dấu ấn sinh học quan trọng nhất, có khả năng dự đoán cao và ổn định trên nhiều tập dữ liệu.")
     
@@ -76,9 +76,10 @@ def show():
         "AUC Tập Kiểm Tra": [0.68, 0.66, 0.728, 0.659, 0.685, 0.746, 0.735],
         "AUC Tập Độc Lập": [0.774, 0.772, 0.758, 0.747, 0.723, 0.69, 0.686],
     }
-    
+
     df = pd.DataFrame(model_data)
-    st.dataframe(df, use_container_width=True)
+    # Increase overall font size in the dataframe
+    st.dataframe(df.style.set_properties(**{'font-size': '22px'}), use_container_width=True)
     
     st.success("**Mô hình tối ưu: Logistic Regression** ✓\n\nMô hình **Logistic Regression** sử dụng 2 gen PTPN11 và MICAL2 đạt hiệu suất cao nhất trên tập dữ liệu độc lập (AUC = 0,774), đồng thời có ưu điểm là đơn giản, dễ giải thích và triển khai trong thực tế.")
     
@@ -101,6 +102,17 @@ def show():
     ]
 
     # Create tabs
+    st.markdown(
+        """
+        <style>
+        /* Increase font size of tab labels */
+        div[data-testid="stTabs"] button[role="tab"] {
+            font-size: 24px;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
     tab1, tab2, tab3 = st.tabs(["Violin Plot", "Biểu đồ ROC và AUC", "Ma trận nhầm lẫn"])
 
     # --- Violin Plot Tab ---
@@ -111,10 +123,10 @@ def show():
                 f"""
                 <div style="text-align: center;">
                     <div style="display: inline-flex; justify-content: center; gap: 20px;">
-                        <img src="data:image/png;base64,{images_base64[0]}" width="300">
-                        <img src="data:image/png;base64,{images_base64[1]}" width="300">
+                        <img src="data:image/png;base64,{images_base64[0]}" width="400">
+                        <img src="data:image/png;base64,{images_base64[1]}" width="400">
                     </div>
-                    <p style="font-size:14px; color:gray; margin-top: 10px;">
+                    <p style="font-size:18px; color:gray; margin-top: 10px;">
                         Biểu đồ Violin thể hiện sự khác biệt về điểm nguy cơ di căn xương giữa hai nhóm di căn và không di căn xương ở hai tập dữ liệu
                     </p>
                 </div>
@@ -179,10 +191,12 @@ def show():
     
     st.markdown("### Sự cải thiện của mô hình")
     st.markdown("""
-    - AUC tăng từ 0,69 (tập kiểm tra) lên 0,774 (tập độc lập)
-    - Độ nhạy 77,8% đảm bảo phát hiện được phần lớn ca di căn
-    - Mô hình ổn định và tổng quát tốt trên dữ liệu mới
-    """)
+    <ul style="font-size:20px;">
+        <li>AUC tăng từ 0,69 (tập kiểm tra) lên 0,774 (tập độc lập)</li>
+        <li>Độ nhạy 77,8% đảm bảo phát hiện được phần lớn ca di căn</li>
+        <li>Mô hình ổn định và tổng quát tốt trên dữ liệu mới</li>
+    </ul>
+    """, unsafe_allow_html=True)
 
 show()
 menu()
