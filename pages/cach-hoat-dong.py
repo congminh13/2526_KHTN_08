@@ -17,6 +17,7 @@ def show():
     st.markdown("##  Dấu ấn sinh học tiềm năng")
     st.markdown("""
 <div style="font-size:20px;">
+
 Dấu ấn sinh học là các đặc điểm trong cơ thể, như gen, protein hoặc các phân tử khác, có thể đo lường được để chỉ ra một tình trạng sinh học cụ thể, ví dụ như một bệnh lý hoặc phản ứng của cơ thể với điều trị. Chúng đóng vai trò quan trọng trong việc chẩn đoán, sàng lọc, theo dõi và lựa chọn phương pháp điều trị tối ưu cho bệnh, đặc biệt là trong lĩnh vực ung thư.
 
 Việc tích hợp các mô hình học máy với dữ liệu dấu ấn sinh học (biomarkers) đã tạo ra một bước tiến đáng kể trong lĩnh vực chẩn đoán sớm ung thư. Dấu ấn sinh học, bao gồm các thông số di truyền, protein, chuyển hóa hoặc các đặc điểm hình ảnh y tế, thường tạo thành các tập dữ liệu có tính chiều cao (high-dimensional) và chứa nhiều nhiễu, vượt quá khả năng phân tích chính xác của các phương pháp thống kê truyền thống. 
@@ -28,7 +29,9 @@ Trong bối cảnh này, mô hình học máy đóng vai trò là công cụ ph�
     st.markdown("## Mô hình học máy dự đoán bệnh")
     st.markdown("""
 <div style="font-size:20px;">
-    Học máy (Machine Learning - ML), một phân ngành quan trọng của Trí tuệ Nhân tạo (Artificial Intelligence - AI), tập trung vào việc phát triển các thuật toán cho phép hệ thống máy tính cải thiện hiệu suất thông qua việc học từ từ dữ liệu đầu vào, mà không cần lập trình cụ thể. 
+
+
+  Học máy (Machine Learning - ML), một phân ngành quan trọng của Trí tuệ Nhân tạo (Artificial Intelligence - AI), tập trung vào việc phát triển các thuật toán cho phép hệ thống máy tính cải thiện hiệu suất thông qua việc học từ từ dữ liệu đầu vào, mà không cần lập trình cụ thể. 
 
   Chức năng cốt lõi của học máy là tự động hóa quá trình rút trích đặc trưng, phân loại và dự đoán, từ đó tạo ra cơ sở cho việc ra quyết định dựa trên bằng chứng trong nhiều lĩnh vực khoa học và kỹ thuật khác nhau.
 </div>

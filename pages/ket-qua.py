@@ -4,6 +4,7 @@ from app import menu
 from pathlib import Path
 import base64
 from Config import Config
+import py3Dmol
 
 st.set_page_config(
     page_title=Config.APP_NAME,
@@ -24,7 +25,9 @@ def show():
     st.markdown("## Kết quả sàng lọc dấu ấn sinh học")
     
     st.markdown("""
-    Sau quá trình phân tích và sàng lọc, chúng tôi xác định được 14 probeset đại diện cho **10 gen** có khả năng dự đoán di căn xương:""")
+    <span style="font-size:20px;">
+    Sau quá trình phân tích và sàng lọc, chúng tôi xác định được 14 probeset đại diện cho <strong>10 genes</strong> có khả năng dự đoán di căn xương:
+    </span>""", unsafe_allow_html=True)
 
     col1, col2 = st.columns(2)
 
@@ -65,6 +68,20 @@ def show():
     
     st.warning("**Đặc biệt chú ý:** Hai gen **PTPN11** và **MICAL2** được xác định là các dấu ấn sinh học quan trọng nhất, có khả năng dự đoán cao và ổn định trên nhiều tập dữ liệu.")
     
+    cif_path = Path("media/2E9K.cif")
+    if cif_path.exists():
+        st.markdown("## Mô hình 3D cấu trúc protein (2E9K)")
+        cif_str = cif_path.read_text()
+        view = py3Dmol.view(width=800, height=600)
+        view.addModel(cif_str, 'cif')
+        # Style: cartoon (spectrum) + sticks overlay
+        view.setStyle({'cartoon': {'color': 'spectrum'}})
+        view.addStyle({}, {'stick': {'radius': 0.2}})
+        view.zoomTo()
+        st.components.v1.html(view._repr_html_(), height=600)
+    else:
+        st.info("Không tìm thấy tệp CIF 2E9K để hiển thị mô hình 3D.")
+
     st.markdown("---")
     st.markdown("## So sánh hiệu suất các mô hình")
     
@@ -126,7 +143,7 @@ def show():
                         <img src="data:image/png;base64,{images_base64[0]}" width="400">
                         <img src="data:image/png;base64,{images_base64[1]}" width="400">
                     </div>
-                    <p style="font-size:18px; color:gray; margin-top: 10px;">
+                    <p style="font-size:18px; color:gray; margin-top: 20px;">
                         Biểu đồ Violin thể hiện sự khác biệt về điểm nguy cơ di căn xương giữa hai nhóm di căn và không di căn xương ở hai tập dữ liệu
                     </p>
                 </div>
