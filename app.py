@@ -252,7 +252,21 @@ if __name__ == '__main__':
     #         st.session_state.page = "Tổng quan"
     #         st.rerun()
 
-  show()
+  st.markdown(
+      """
+      <style>
+        /* Fixed sidebar width: 281px */
+        section[data-testid="stSidebar"],
+        section[data-testid="stSidebar"] > div,
+        [data-testid="stSidebar"] [data-testid="stSidebarContent"] {
+          width: 281px !important;
+          min-width: 281px !important;
+          max-width: 281px !important;
+        }
+      </style>
+      """,
+      unsafe_allow_html=True
+  )
   menu()
   
 
