@@ -15,7 +15,7 @@ def show():
     st.markdown("---")
 
     # I. Ung thư vú di căn Xương là gì?
-    st.markdown("## Ung thư Vú di căn Xương là gì?")
+    st.markdown("## Ung thư Vú là gì?")
     st.markdown("""
 <div style="
     font-size: 22px;
@@ -25,7 +25,7 @@ def show():
     """, unsafe_allow_html=True)
 
     # II. Tình hình trên thế giới và tại Việt Nam
-    st.markdown("## Tình hình trên thế giới và tại Việt Nam:")
+    st.markdown("## Tình hình trên thế giới và tại Việt Nam")
 
     img_path = Path("media/graphic-asr-inc-both-sexes-in-2022-breast.png")
     if img_path.exists():
@@ -94,7 +94,7 @@ def show():
     """, unsafe_allow_html=True)
 
     # IV. Các phương pháp phát hiện
-    st.markdown("## Các phương pháp phát hiện")
+    st.markdown("## Các phương pháp chẩn đoán")
     st.markdown("""
     <div style="font-size:20px;">
       
@@ -106,6 +106,12 @@ def show():
 
       So với các phương pháp truyền thống, các chỉ thị sinh học có ưu điểm xét nghiệm đơn giản, nhanh, theo dõi được tiến triển bệnh và đánh giá hiệu quả điều trị. Tuy nhiên, các chỉ thị sinh học vẫn cần kết hợp với phương pháp khác để giúp bổ sung và hoàn thiện cho nhau, khắc phục những hạn chế của mỗi phương pháp khi được sử dụng riêng lẻ, tăng tính chính xác trong chẩn đoán và theo dõi ung thư vú di căn xương.
     </div>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+        <div style="text-align: center; margin-top: 32px; color: #567; font-size: 0.9em;">
+            <p>© 2025 Nhóm Nghiên Cứu - Trường THPT Gia Định</p>
+        </div>
     """, unsafe_allow_html=True)
 
 

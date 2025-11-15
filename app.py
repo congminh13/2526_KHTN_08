@@ -46,7 +46,7 @@ def set_video_background():
         width: 100%;
         height: 100%;
         object-fit: cover;
-        opacity: 1; /* 90% transparency */
+        opacity: 0.6; /* 90% transparency */
       }
       .stApp,
       [data-testid="stHeader"],
@@ -252,23 +252,5 @@ if __name__ == '__main__':
     #         st.session_state.page = "Tổng quan"
     #         st.rerun()
 
-  st.markdown(
-      """
-      <style>
-        /* Fixed sidebar width: 281px */
-        section[data-testid="stSidebar"],
-        section[data-testid="stSidebar"] > div,
-        [data-testid="stSidebar"] [data-testid="stSidebarContent"] {
-          width: 281px !important;
-          min-width: 281px !important;
-          max-width: 281px !important;
-        }
-      </style>
-      """,
-      unsafe_allow_html=True
-  )
+  show()
   menu()
-  
-
-
-  

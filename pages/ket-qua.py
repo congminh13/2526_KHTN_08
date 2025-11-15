@@ -55,107 +55,7 @@ def show():
     else:
         st.info("Một hoặc cả hai hình ảnh chưa được thêm.")
     
-    genes = ["NFYC", "CEP57", "CD44", "ABCC5", "TGFB1I1", "PTPN11", "SMARCA2", "MICAL2", "SLC36A1", "ZXDA"]
-
-    cols = st.columns(5)
-    for i, gene in enumerate(genes):
-        with cols[i % 5]:
-            if gene in ["PTPN11", "MICAL2"]:
-                st.info(f"**{i+1}. {gene}**")
-            else:
-                st.markdown(f"**{i+1}. {gene}**", unsafe_allow_html=True)
-    
     st.success("**Đặc biệt chú ý:** Hai gen **PTPN11** và **MICAL2** được xác định là các dấu ấn sinh học quan trọng nhất, có khả năng dự đoán cao và ổn định trên nhiều tập dữ liệu.")
-
-    
-    st.markdown("---")
-    st.markdown("### Mô hình 3D Cấu trúc Protein")
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.markdown("PTPN11 (Protein Tyrosine Phosphatase Non-receptor type 11) giữ một vai trong việc điều hòa các con đường truyền tín hiệu nội bào. Gene này mã hóa enzyme SHP2, hoạt động như một trạm trung chuyển tín hiệu, giúp kiểm soát các quá trình sống còn của tế bào như tăng trưởng, phân chia, biệt hóa và di chuyển.")
-        html_code_1 = """
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <script src="https://molstar.org/viewer/molstar.js"></script>
-            <style>
-                body {
-                    margin: 0;
-                    background: #f8f9fa;
-                }
-                #molstar {
-                    width: 100%;
-                    height: 500px;
-                }
-            </style>
-        </head>
-        <body>
-            <div id="molstar"></div>
-            <script>
-                molstar.Viewer.create(
-                    document.getElementById('molstar'),
-                    {
-                        layoutShowControls: false,
-                        layoutShowSequence: false,
-                        layoutShowRightPanel: false
-                    }
-                ).then(viewer => {
-                    viewer.loadStructureFromUrl(
-                        'https://files.rcsb.org/download/8WX7.cif',
-                        'mmcif'
-                    );
-                });
-            </script>
-        </body>
-        </html>
-        """
-        st.components.v1.html(html_code_1, height=500)
-        st.markdown("Ma, C., Kang, D., Gao, P., Zhang, W., Wu, X., Xu, Z., Han, H., Zhang, L., Cai, Y., Wang, Y., Wang, Y., Long, W., Crystal structure of SHP2 in complex with JAB-3186 (2024) https://doi.org/10.2210/pdb8wx7/pdb")
-
-    with col2:
-        st.markdown("MICAL2 (Molecule Interacting with CasL 2) là một enzyme có khả năng phá vỡ cấu trúc bên trong tế bào. Sự thay đổi này làm cho tế bào dễ dàng thay đổi hình dạng và di chuyển hơn.")
-        st.markdown("")
-        st.markdown("")
-        st.markdown("")
-        html_code_2 = """
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <script src="https://molstar.org/viewer/molstar.js"></script>
-            <style>
-                body {
-                    margin: 0;
-                    background: #f8f9fa;
-                }
-                #molstar {
-                    width: 100%;
-                    height: 500px;
-                }
-            </style>
-        </head>
-        <body>
-            <div id="molstar"></div>
-            <script>
-                molstar.Viewer.create(
-                    document.getElementById('molstar'),
-                    {
-                        layoutShowControls: false,
-                        layoutShowSequence: false,
-                        layoutShowRightPanel: false
-                    }
-                ).then(viewer => {
-                    viewer.loadStructureFromUrl(
-                        'https://files.rcsb.org/download/2E9K.cif',
-                        'mmcif'
-                    );
-                });
-            </script>
-        </body>
-        </html>
-        """
-        st.components.v1.html(html_code_2, height=500)
-        st.markdown("Tomizawa, T., Tochio, N., Koshiba, S., Watanabe, S., Harada, T., Kigawa, T., Yokoyama, S., Solution structure of the CH domain from human MICAL-2 (deposited year unknown) https://doi.org/10.2210/pdb2e9k/pdb")
 
     
     st.markdown("---")
@@ -166,11 +66,15 @@ def show():
     model_data = {
         "Mô hình": ["Logistic Regression", "SVM", "KNN", "XGBoost", "AdaBoost", "Random Forest", "Decision Tree"],
         "Tổ hợp gene tối ưu": ["PTPN11, MICAL2", "PTPN11, MICAL2", "ABCC5, TGFB1I1, PTPN11, SLC36A1", "ABCC5, TGFB1I1, SMARCA2, SLC36A1", "ABCC5, TGFB1I1, PTPN11, MICAL2, SLC36A1", "PTPN11, MICAL2", "MICAL2, NFYC, CD44"],
-        "AUC Tập Kiểm Tra": [0.68, 0.66, 0.728, 0.659, 0.685, 0.746, 0.735],
-        "AUC Tập Độc Lập": [0.774, 0.772, 0.758, 0.747, 0.723, 0.69, 0.686],
+        "AUC Tập Kiểm Tra": ["0.68", "0.66", "0.728", "0.659", "0.685", "0.746", "0.735"],
+        "AUC Tập Độc Lập": ["0.774", "0.772", "0.758", "0.747", "0.723", "0.69", "0.686"],
     }
 
     df = pd.DataFrame(model_data)
+    df.index = range(1, len(df) + 1)  # Start index from 1
+    # Format AUC columns to 3 decimal places
+    df["AUC Tập Kiểm Tra"] = df["AUC Tập Kiểm Tra"]
+    df["AUC Tập Độc Lập"] = df["AUC Tập Độc Lập"]
     # Increase overall font size in the dataframe
     st.dataframe(df.style.set_properties(**{'font-size': '22px'}), use_container_width=True)
     
@@ -216,8 +120,8 @@ def show():
                 f"""
                 <div style="text-align: center;">
                     <div style="display: inline-flex; justify-content: center; gap: 20px;">
-                        <img src="data:image/png;base64,{images_base64[0]}" width="400">
-                        <img src="data:image/png;base64,{images_base64[1]}" width="400">
+                        <img src="data:image/png;base64,{images_base64[0]}" width="330">
+                        <img src="data:image/png;base64,{images_base64[1]}" width="330">
                     </div>
                     <p style="font-size:18px; color:gray; margin-top: 20px;">
                         Biểu đồ Violin thể hiện sự khác biệt về điểm nguy cơ di căn xương giữa hai nhóm di căn và không di căn xương ở hai tập dữ liệu
@@ -237,7 +141,7 @@ def show():
                 f"""
                 <div style="text-align: center;">
                     <img src="data:image/png;base64,{img_base64}" width="400">
-                    <p style="font-size:14px; color:gray; margin-top: 10px;">
+                    <p style="font-size:18px; color:gray; margin-top: 10px;">
                         Đường cong ROC thể hiện khả năng dự đoán di căn xương ở bệnh nhân ung thư vú trên hai tập dữ liệu kiểm tra và độc lập
                     </p>
                 </div>
@@ -258,7 +162,7 @@ def show():
                         <img src="data:image/png;base64,{images_base64[0]}" width="350">
                         <img src="data:image/png;base64,{images_base64[1]}" width="350">
                     </div>
-                    <p style="font-size:14px; color:gray; margin-top: 10px;">
+                    <p style="font-size:18px; color:gray; margin-top: 10px;">
                         Ma trận nhầm lẫn của tập kiểm tra và tập độc lập
                     </p>
                 </div>
@@ -289,6 +193,12 @@ def show():
         <li>Độ nhạy 77,8% đảm bảo phát hiện được phần lớn ca di căn</li>
         <li>Mô hình ổn định và tổng quát tốt trên dữ liệu mới</li>
     </ul>
+    """, unsafe_allow_html=True)
+
+    st.markdown("""
+        <div style="text-align: center; margin-top: 32px; color: #567; font-size: 0.9em;">
+            <p>© 2025 Nhóm Nghiên Cứu - Trường THPT Gia Định</p>
+        </div>
     """, unsafe_allow_html=True)
 
 show()

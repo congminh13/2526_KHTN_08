@@ -5,9 +5,6 @@ liveSave = true
 
 [theme]
 base = "light"
-backgroundColor = "#f0f0f0"
-secondaryBackgroundColor = "#e4e4e4"
-font = "serif"
 
 [server]
 runOnSave = true
